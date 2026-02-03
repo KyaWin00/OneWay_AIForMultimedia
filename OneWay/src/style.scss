@@ -264,48 +264,8 @@ code { color: rgba($accent, .95); }
     aspect-ratio: 16 / 9;
     background: rgba(0,0,0,.25);
   }
-
-  /* Placeholder overlay shown when iframe src is empty */
-  &:has(iframe[src=""]) .video__placeholder { display: flex; }
-
-  &__placeholder {
-    display: none;
-    position: absolute;
-    inset: 0;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    padding: 18px;
-    background:
-      radial-gradient(500px 280px at 50% 50%, rgba($accent, .12), transparent 60%),
-      rgba(0,0,0,.38);
-  }
-
-  &__ph-title { font-weight: 700; margin-bottom: 4px; }
-  &__ph-sub { color: $muted; font-size: 14px; }
 }
 
-.play {
-  width: 58px;
-  height: 58px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.22);
-  background: rgba(255,255,255,.07);
-  position: relative;
-  box-shadow: 0 0 24px rgba($accent, .14);
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 23px;
-    top: 18px;
-    width: 0;
-    height: 0;
-    border-top: 11px solid transparent;
-    border-bottom: 11px solid transparent;
-    border-left: 18px solid rgba(255,255,255,.88);
-  }
-}
 
 /* Footer */
 .footer {
