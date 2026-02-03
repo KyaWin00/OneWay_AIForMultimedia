@@ -75,7 +75,6 @@ code { color: rgba($accent, .95); }
   &__logo {
     width: 32px;
     height: 32px;
-    filter: drop-shadow(0 0 14px rgba($accent, .12));
   }
 
   &__name {
@@ -203,24 +202,6 @@ code { color: rgba($accent, .95); }
   height: 410px;
   object-fit: cover;
   filter: saturate(1.05) contrast(1.02);
-}
-
-.badge {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  padding: 8px 10px;
-  border-radius: 999px;
-  border: 1px solid $line;
-  background: rgba($navy, .70);
-  color: $muted;
-  font-size: 12px;
-  backdrop-filter: blur(8px);
-
-  &--small {
-    padding: 6px 9px;
-    font-size: 12px;
-  }
 }
 
 /* Feature cards */
