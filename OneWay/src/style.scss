@@ -1,32 +1,36 @@
-/* styles.scss (simplified) */
+/* styles.scss (non-overlapping section backgrounds)
+   Key change: each section has its own SOLID background color.
+   No transparent section overlays + no negative margins + no absolute positioning. */
 
-/* ---- Theme ---- */
-$bg: #0b1220;
+$navy: #0b1220;
+$navyDeep: #070c15;
+$navyAlt: #0f1a2d;      // slightly lighter dark blue for alternating sections
 $text: #f2f4f8;
-$muted: rgba($text, 0.72);
-$line: rgba($text, 0.12);
+$muted: rgba($text, .72);
+$muted2: rgba($text, .55);
+$line: rgba($text, .12);
 $accent: #ffd56a;
 
-$radius: 18px;
-$shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-$shadowSoft: 0 8px 20px rgba(0, 0, 0, 0.22);
-
-$container: 1100px;
 $font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+$container: 1100px;
+$radius: 18px;
+$radiusLg: 24px;
+$shadow: 0 14px 36px rgba(0,0,0,.38);
+$shadowSoft: 0 10px 24px rgba(0,0,0,.22);
 
 @mixin container {
   width: min(#{$container}, calc(100% - 40px));
   margin: 0 auto;
 }
 
-@mixin panel($bgc: rgba(255, 255, 255, 0.04)) {
+@mixin panel($bg: rgba(255,255,255,.04)) {
   border: 1px solid $line;
-  background: $bgc;
-  border-radius: $radius;
+  background: $bg;
+  border-radius: $radiusLg;
   box-shadow: $shadowSoft;
 }
 
-/* ---- Base ---- */
+/* Base */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 
@@ -35,29 +39,31 @@ body {
   font-family: $font;
   color: $text;
   line-height: 1.5;
-  background:
-    radial-gradient(900px 500px at 20% 0%, rgba($accent, 0.10), transparent 60%),
-    linear-gradient(180deg, $bg, #070c15 60%, #060a12);
+  background: $navyDeep;           // solid base to avoid “see-through” overlap feeling
 }
 
 img { max-width: 100%; display: block; }
-code { color: rgba($accent, 0.95); }
+a { color: inherit; text-decoration: none; }
+a:focus { outline: 3px solid rgba($accent, .45); outline-offset: 3px; }
+code { color: rgba($accent, .95); }
 
 .container { @include container; }
 
-/* ---- Header ---- */
+/* Header */
 .header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba($bg, 0.78);
+  background: rgba($navy, .92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid $line;
 
   &__inner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 14px 0;
+    gap: 16px;
   }
 }
 
@@ -69,12 +75,12 @@ code { color: rgba($accent, 0.95); }
   &__logo {
     width: 32px;
     height: 32px;
-    filter: drop-shadow(0 0 14px rgba($accent, 0.12));
+    filter: drop-shadow(0 0 14px rgba($accent, .12));
   }
 
   &__name {
     font-weight: 800;
-    letter-spacing: 0.2px;
+    letter-spacing: .2px;
   }
 
   &__tagline {
@@ -83,42 +89,120 @@ code { color: rgba($accent, 0.95); }
   }
 }
 
-/* ---- Hero ---- */
-.hero {
-  padding: 52px 0 28px;
+.nav {
+  display: flex;
+  gap: 14px;
+  color: $muted;
+  font-size: 14px;
 
-  &__grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 36px;
-    align-items: center;
+  a {
+    padding: 8px 10px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+
+    &:hover {
+      color: $text;
+      border-color: $line;
+      background: rgba(255,255,255,.04);
+    }
+  }
+}
+
+/* Sections (no overlap) */
+.section {
+  position: relative;
+  display: block;
+  margin: 0;                     // ensure no negative margins
+  padding: 64px 0;
+  background: $navy;             // solid per section
+  border-top: 1px solid rgba($text, .06); // subtle separator
+
+  &--alt {
+    background: $navyAlt;        // alternating solid background
   }
 
-  &__title {
-    margin: 0 0 10px;
-    font-size: clamp(34px, 4vw, 52px);
-    line-height: 1.05;
-    letter-spacing: -0.8px;
+  &--hero {
+    background:
+      radial-gradient(900px 500px at 20% 0%, rgba($accent, 0.10), transparent 60%),
+      radial-gradient(900px 500px at 85% 10%, rgba(120,170,255,0.12), transparent 60%),
+      $navy;                     // still solid base at the end
+    border-top: 0;
   }
+}
 
-  &__lead {
-    margin: 0;
-    color: $muted;
-    max-width: 60ch;
-  }
+.section__head {
+  max-width: 78ch;
+  margin-bottom: 20px;
+}
 
-  &__media {
-    @include panel(rgba(255, 255, 255, 0.03));
-    overflow: hidden;
-    position: relative;
-    box-shadow: $shadow;
-  }
+.section__title {
+  margin: 0 0 10px;
+  font-size: 26px;
+  letter-spacing: -0.35px;
+}
 
-  &__image {
-    width: 100%;
-    height: 380px;
-    object-fit: cover;
+.section__text {
+  margin: 0;
+  color: $muted;
+}
+
+/* Hero */
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 38px;
+  align-items: center;
+}
+
+.hero__title {
+  margin: 0 0 10px;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -0.9px;
+}
+
+.hero__lead {
+  margin: 0 0 18px;
+  color: $muted;
+  max-width: 60ch;
+  font-size: 16px;
+}
+
+.hero__chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid $line;
+  background: rgba(255,255,255,.04);
+  color: $muted;
+  font-size: 13px;
+
+  &--accent {
+    border-color: rgba($accent, .28);
+    background: rgba($accent, .10);
+    color: rgba($accent, .95);
   }
+}
+
+.hero__media {
+  @include panel(rgba(255,255,255,.03));
+  overflow: hidden;
+  position: relative;
+  box-shadow: $shadow;
+}
+
+.hero__image {
+  width: 100%;
+  height: 410px;
+  object-fit: cover;
+  filter: saturate(1.05) contrast(1.02);
 }
 
 .badge {
@@ -128,7 +212,7 @@ code { color: rgba($accent, 0.95); }
   padding: 8px 10px;
   border-radius: 999px;
   border: 1px solid $line;
-  background: rgba($bg, 0.62);
+  background: rgba($navy, .70);
   color: $muted;
   font-size: 12px;
   backdrop-filter: blur(8px);
@@ -139,83 +223,69 @@ code { color: rgba($accent, 0.95); }
   }
 }
 
-/* ---- Sections ---- */
-.section {
-  padding: 46px 0;
-
-  &__title {
-    margin: 0 0 10px;
-    font-size: 24px;
-    letter-spacing: -0.3px;
-  }
-
-  &__text {
-    margin: 0;
-    color: $muted;
-    max-width: 75ch;
-  }
-}
-
-/* ---- Features ---- */
-.features {
+/* Feature cards */
+.cards {
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin-top: 18px;
 }
 
-.feature {
-  @include panel;
+.card {
+  @include panel(rgba(255,255,255,.04));
   padding: 16px;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 16px;
-  align-items: center;
+  grid-template-rows: auto auto 1fr;
+  gap: 12px;
 
   &__title {
-    margin: 0 0 8px;
+    margin: 0;
     font-size: 18px;
+    letter-spacing: -0.2px;
   }
 
   &__text {
     margin: 0;
     color: $muted;
+    font-size: 14px;
   }
 
   &__media {
     position: relative;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
     border: 1px solid $line;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255,255,255,.03);
 
     img {
       width: 100%;
-      height: 220px;
+      height: 200px;
       object-fit: cover;
-      opacity: 0.95;
+      opacity: .95;
     }
 
     .badge {
-      position: absolute;
       left: 10px;
       bottom: 10px;
     }
   }
 }
 
-/* ---- Video ---- */
+/* Video */
 .video {
-  @include panel(rgba(255, 255, 255, 0.03));
+  @include panel(rgba(255,255,255,.03));
   overflow: hidden;
   position: relative;
-  margin-top: 16px;
 
   &__frame {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0,0,0,.25);
   }
+
+  /* Placeholder overlay shown when iframe src is empty */
+  &:has(iframe[src=""]) .video__placeholder { display: flex; }
 
   &__placeholder {
     display: none;
@@ -226,34 +296,22 @@ code { color: rgba($accent, 0.95); }
     gap: 14px;
     padding: 18px;
     background:
-      radial-gradient(500px 280px at 50% 50%, rgba($accent, 0.12), transparent 60%),
-      rgba(0, 0, 0, 0.35);
+      radial-gradient(500px 280px at 50% 50%, rgba($accent, .12), transparent 60%),
+      rgba(0,0,0,.38);
   }
 
-  &__ph-title {
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  &__ph-sub {
-    color: $muted;
-    font-size: 14px;
-  }
-}
-
-/* Show placeholder when iframe src is empty */
-.video:has(iframe[src=""]) .video__placeholder {
-  display: flex;
+  &__ph-title { font-weight: 700; margin-bottom: 4px; }
+  &__ph-sub { color: $muted; font-size: 14px; }
 }
 
 .play {
   width: 58px;
   height: 58px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.07);
   position: relative;
-  box-shadow: 0 0 24px rgba($accent, 0.14);
+  box-shadow: 0 0 24px rgba($accent, .14);
 
   &::after {
     content: "";
@@ -264,32 +322,82 @@ code { color: rgba($accent, 0.95); }
     height: 0;
     border-top: 11px solid transparent;
     border-bottom: 11px solid transparent;
-    border-left: 18px solid rgba(255, 255, 255, 0.88);
+    border-left: 18px solid rgba(255,255,255,.88);
   }
 }
 
-/* ---- Footer ---- */
+/* Footer */
 .footer {
-  border-top: 1px solid $line;
-  background: rgba(255, 255, 255, 0.02);
-  padding: 22px 0;
+  background: $navyDeep;                 // solid, separate background
+  border-top: 1px solid rgba($text, .10);
+  padding: 32px 0 18px;
 
-  &__inner {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  &__brand-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  &__logo { width: 34px; height: 34px; }
+  &__name { font-weight: 800; }
+  &__tagline { color: $muted; font-size: 14px; }
+
+  &__note {
+    margin: 12px 0 0;
+    color: $muted2;
+    font-size: 14px;
+    max-width: 60ch;
+  }
+
+  &__cols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  &__col-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  &__col a {
+    display: block;
+    padding: 7px 0;
+    color: $muted;
+    font-size: 14px;
+
+    &:hover { color: $text; }
+  }
+
+  &__bottom {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba($text, .10);
     display: flex;
     justify-content: space-between;
-    gap: 14px;
+    gap: 12px;
     flex-wrap: wrap;
+    color: $muted2;
+    font-size: 13px;
   }
 
-  &__brand { font-weight: 800; }
-  &__tag { color: $muted; font-size: 14px; }
-  &__note { color: rgba($text, 0.55); font-size: 13px; margin-top: 6px; }
-  &__meta { color: rgba($text, 0.55); font-size: 13px; }
+  &__accent { color: rgba($accent, .9); }
 }
 
-/* ---- Responsive ---- */
-@media (max-width: 900px) {
+/* Responsive */
+@media (max-width: 980px) {
+  .nav { display: none; }
   .hero__grid { grid-template-columns: 1fr; }
-  .hero__image { height: 320px; }
-  .feature { grid-template-columns: 1fr; }
+  .hero__image { height: 340px; }
+  .cards { grid-template-columns: 1fr; }
+  .footer__grid { grid-template-columns: 1fr; }
+  .footer__cols { grid-template-columns: 1fr; }
 }

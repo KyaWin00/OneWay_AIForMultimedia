@@ -1,4 +1,4 @@
-<!-- index.html (simplified one-page, no multi-page links) -->
+<!-- index.html (new one-page site — non-overlapping section backgrounds) -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,96 +29,128 @@
             <div class="brand__tagline">The right way home</div>
           </div>
         </div>
+
+        <nav class="nav" aria-label="On-page navigation">
+          <a href="#about">Why OneWay</a>
+          <a href="#features">Features</a>
+          <a href="#video">Video</a>
+        </nav>
       </div>
     </header>
 
-    <main>
-      <!-- Hero -->
-      <section class="hero">
-        <div class="container hero__grid">
-          <div class="hero__copy">
-            <h1 class="hero__title">The right way home</h1>
-            <p class="hero__lead">
-              A safe and reliable electric bike designed for everyday peace of
-              mind.
+    <main class="page">
+      <!-- HERO (Section 1) -->
+      <section class="section section--hero" aria-labelledby="hero-title">
+        <div class="container hero">
+          <div class="hero__grid">
+            <div class="hero__copy">
+              <h1 id="hero-title" class="hero__title">The right way home</h1>
+              <p class="hero__lead">
+                A safe and reliable electric bike designed for everyday peace of
+                mind.
+              </p>
+
+              <div class="hero__chips" aria-label="Brand qualities">
+                <span class="chip">Safety</span>
+                <span class="chip">Trust</span>
+                <span class="chip chip--accent">Simplicity</span>
+              </div>
+            </div>
+
+            <figure class="hero__media">
+              <img
+                class="hero__image"
+                src="bike-placeholder.jpg"
+                alt="Bike photo placeholder"
+              />
+              <figcaption class="badge">Bike photo placeholder</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT (Section 2) -->
+      <section
+        class="section section--alt"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <div class="container">
+          <header class="section__head">
+            <h2 id="about-title" class="section__title">
+              Why OneWay — and what it is
+            </h2>
+            <p class="section__text">
+              OneWay is a household-focused electric bike brand built around
+              safety, trust, and clarity. It’s designed for people who want one
+              reliable bike that’s easy to share, easy to use, and reassuring to
+              own.
             </p>
-          </div>
-
-          <div class="hero__media">
-            <img
-              class="hero__image"
-              src="bike-placeholder.jpg"
-              alt="Placeholder image of the OneWay electric bike"
-            />
-            <div class="badge">Bike photo placeholder</div>
-          </div>
+          </header>
         </div>
       </section>
 
-      <!-- About -->
-      <section class="section">
+      <!-- FEATURES (Section 3) -->
+      <section class="section" id="features" aria-labelledby="features-title">
         <div class="container">
-          <h2 class="section__title">Why OneWay — and what it is</h2>
-          <p class="section__text">
-            OneWay is built around safety, trust, and simplicity—made for
-            households that want one reliable electric bike that’s easy to share
-            and reassuring to own.
-          </p>
-        </div>
-      </section>
+          <header class="section__head">
+            <h2 id="features-title" class="section__title">Features</h2>
+            <p class="section__text">
+              Three core features, explained clearly—each with a simple visual
+              placeholder.
+            </p>
+          </header>
 
-      <!-- Features (simple, 3 items) -->
-      <section class="section">
-        <div class="container">
-          <h2 class="section__title">Features</h2>
-
-          <div class="features">
-            <article class="feature">
-              <div class="feature__copy">
-                <h3 class="feature__title">Household account sharing</h3>
-                <p class="feature__text">
-                  One bike designed to be used by multiple people in the same
-                  household—simple and practical.
+          <div class="cards" aria-label="Feature overview cards">
+            <article class="card">
+              <div class="card__copy">
+                <h3 class="card__title">Household account sharing</h3>
+                <p class="card__text">
+                  Share one bike across multiple household members. Switch
+                  riders smoothly and keep the experience consistent for
+                  everyone.
                 </p>
               </div>
-              <div class="feature__media">
+              <div class="card__media">
                 <img
                   src="feature-accounts-placeholder.jpg"
-                  alt="Placeholder image for household sharing"
+                  alt="Household sharing feature image placeholder"
                 />
                 <span class="badge badge--small">Image placeholder</span>
               </div>
             </article>
 
-            <article class="feature">
-              <div class="feature__copy">
-                <h3 class="feature__title">Safer route guidance</h3>
-                <p class="feature__text">
-                  Route guidance that prioritizes safer choices—not just the
-                  fastest path.
+            <article class="card">
+              <div class="card__copy">
+                <h3 class="card__title">Safest route guidance</h3>
+                <p class="card__text">
+                  Route guidance that prioritizes safety—not just speed.
+                  Designed to help you choose routes that feel more comfortable
+                  and confident.
                 </p>
               </div>
-              <div class="feature__media">
+              <div class="card__media">
                 <img
                   src="feature-route-placeholder.jpg"
-                  alt="Placeholder image for safe route guidance"
+                  alt="Safest route feature image placeholder"
                 />
                 <span class="badge badge--small">Image placeholder</span>
               </div>
             </article>
 
-            <article class="feature">
-              <div class="feature__copy">
-                <h3 class="feature__title">Locked movement alerts</h3>
-                <p class="feature__text">
-                  Get notified if your bike is moved unexpectedly while it’s
-                  parked and locked.
+            <article class="card">
+              <div class="card__copy">
+                <h3 class="card__title">Locked movement notifications</h3>
+                <p class="card__text">
+                  Get notified when your bike is locked and moved
+                  unexpectedly—so you can react quickly and protect what’s
+                  yours.
                 </p>
               </div>
-              <div class="feature__media">
+              <div class="card__media">
                 <img
                   src="feature-alerts-placeholder.jpg"
-                  alt="Placeholder image for movement alerts"
+                  alt="Movement alert feature image placeholder"
                 />
                 <span class="badge badge--small">Image placeholder</span>
               </div>
@@ -127,21 +159,27 @@
         </div>
       </section>
 
-      <!-- Video -->
-      <section class="section">
+      <!-- VIDEO (Section 4) -->
+      <section
+        class="section section--alt"
+        id="video"
+        aria-labelledby="video-title"
+      >
         <div class="container">
-          <h2 class="section__title">Watch the video</h2>
-          <p class="section__text">
-            Paste your YouTube embed link into the iframe
-            <code>src</code> below.
-          </p>
+          <header class="section__head">
+            <h2 id="video-title" class="section__title">Watch the promo</h2>
+            <p class="section__text">
+              Paste your YouTube embed link into the iframe <code>src</code>.
+              Example: <code>https://www.youtube.com/embed/VIDEO_ID</code>
+            </p>
+          </header>
 
           <div class="video">
-            <!-- Replace src with: https://www.youtube.com/embed/VIDEO_ID -->
+            <!-- Replace src with your YouTube embed URL -->
             <iframe
               class="video__frame"
               src=""
-              title="OneWay promotional video (YouTube)"
+              title="OneWay promotional video"
               frameborder="0"
               allow="
                 accelerometer;
@@ -153,13 +191,12 @@
                 web-share;
               "
               allowfullscreen
-            >
-            </iframe>
+            ></iframe>
 
-            <!-- Visible when iframe src is empty -->
+            <!-- Placeholder overlay (shown when src is empty) -->
             <div class="video__placeholder" aria-hidden="true">
               <div class="play"></div>
-              <div>
+              <div class="video__ph-text">
                 <div class="video__ph-title">YouTube placeholder</div>
                 <div class="video__ph-sub">
                   Add your embed URL in the iframe src
@@ -171,25 +208,57 @@
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container footer__inner">
-        <div class="footer__left">
-          <div class="footer__brand">OneWay</div>
-          <div class="footer__tag">The right way home</div>
-          <div class="footer__note">School project • One-page concept site</div>
+    <!-- Footer (Section 5) -->
+    <footer class="footer" aria-label="Footer">
+      <div class="container footer__grid">
+        <div class="footer__brand">
+          <div class="footer__brand-row">
+            <img
+              class="footer__logo"
+              src="logo-placeholder.svg"
+              alt="OneWay logo"
+            />
+            <div>
+              <div class="footer__name">OneWay</div>
+              <div class="footer__tagline">The right way home</div>
+            </div>
+          </div>
+          <p class="footer__note">
+            One-page brand concept site for a school project.
+          </p>
         </div>
 
-        <div class="footer__right">
-          <div class="footer__meta">Safety • Trust • Simplicity</div>
-          <div class="footer__meta">© <span id="year"></span> OneWay</div>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <div class="footer__col-title">Sections</div>
+            <a href="#about">Why OneWay</a>
+            <a href="#features">Features</a>
+            <a href="#video">Video</a>
+          </div>
+          <div class="footer__col">
+            <div class="footer__col-title">Contact</div>
+            <a href="#">Email placeholder</a>
+            <a href="#">Social placeholder</a>
+          </div>
+          <div class="footer__col">
+            <div class="footer__col-title">Legal</div>
+            <a href="#">Privacy placeholder</a>
+            <a href="#">Terms placeholder</a>
+          </div>
         </div>
       </div>
-    </footer>
 
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-    <script type="module" src="/src/main.js"></script>
+      <div class="container footer__bottom">
+        <span>© <span id="year"></span> OneWay. All rights reserved.</span>
+        <span class="footer__accent">Safety • Trust • Simplicity</span>
+      </div>
+
+      <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+      </script>
+
+      <!-- Vite entry (if you use Vite) -->
+      <script type="module" src="/src/main.js"></script>
+    </footer>
   </body>
 </html>
